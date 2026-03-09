@@ -1,0 +1,212 @@
+{
+  "categories": [
+    "IoT Systems",
+    "AI & Computer Vision",
+    "Mobile Apps",
+    "Web & UI/UX",
+    "Data & Analytics",
+    "Real-time & VR"
+  ],
+  "projects": [
+    {
+      "id": "1",
+      "imageUrl": "1.png",
+      "projectName": "Bus Route Tracking System",
+      "description": "This project addressed the challenge of students missing university buses due to a lack of real-time visibility. I designed a system that utilizes mobile phones as tracking devices instead of expensive hardware, providing live location data and route intelligence to hundreds of students.\n\nIt replaced an unreliable WhatsApp-based sharing method with a centralized, searchable dashboard. This allowed students to find the nearest stops and arrival times efficiently, transforming campus transport with zero hardware investment.",
+      "category": "IoT Systems",
+      "duration": "6 Months",
+      "industry": "Transportation / Smart Campus",
+      "slug": "bus-route-tracking-system"
+    },
+    {
+      "id": "2",
+      "imageUrl": "2.png",
+      "projectName": "POS System for Book Shop",
+      "description": "This is a custom billing and inventory management system built for a local book shop to replace manual, paper-based record-keeping. It solved critical business issues like the risk of fraud and lack of sales visibility by digitizing every transaction and stock movement.\n\nThe solution provides the owner with a dedicated mobile app for live monitoring and automated alerts for inventory health. It streamlined daily operations and provided historical data that helped the business reduce losses and make smarter purchasing decisions.",
+      "category": "Web & UI/UX",
+      "duration": "3 Months",
+      "industry": "Retail",
+      "slug": "pos-system-for-book-shop"
+    },
+    {
+      "id": "3",
+      "imageUrl": "3.png",
+      "projectName": "IoT-BT Image Viewer",
+      "description": "This project involved creating a wireless system to stream images and GIFs from a smartphone to an LED matrix display over Bluetooth. It solved the problem of microcontrollers having extremely limited memory, which frequently caused crashes during large file transfers.\n\nI developed a custom chunk-based protocol and utilized SD card buffering to handle data flow reliably on low-cost hardware. This turned a manual, cable-based update process into a smooth, wireless display solution capable of playing complex animations.",
+      "category": "IoT Systems",
+      "duration": "2 Months",
+      "industry": "Tech R&D",
+      "slug": "iot-bt-image-viewer"
+    },
+    {
+      "id": "4",
+      "imageUrl": "4.png",
+      "projectName": "Quiz App",
+      "description": "Built for an educational client, this mobile platform automates the entire quiz-taking and grading process. It eliminated the need for manual paper-based testing and slow evaluation by providing students with a fast digital experience and instant results.\n\nThe app features user authentication, a live scoreboard, and the ability to reattempt tests for better learning. By leveraging a serverless backend, I delivered a fully functional MVP in just one week, allowing the client to scale their digital assessments rapidly.",
+      "category": "Mobile Apps",
+      "duration": "1 Week",
+      "industry": "Education",
+      "slug": "quiz-app"
+    },
+    {
+      "id": "5",
+      "imageUrl": "5.png",
+      "projectName": "ESPConnect (Remote Command Console)",
+      "description": "This project is a mobile-based remote control and command console for ESP8266 hardware devices. It was designed to allow developers to interact with their hardware directly from a phone without relying on expensive or complex cloud services.\n\nThe app features a real-time console that displays live execution logs and feedback from the device. It solved the lack of a mobile interface for hardware testing, providing a low-latency and secure way to monitor IoT devices over a local network.",
+      "category": "IoT Systems",
+      "duration": "3 Months",
+      "industry": "Embedded Systems",
+      "slug": "espconnect-remote-command-console"
+    },
+    {
+      "id": "6",
+      "imageUrl": "7.png",
+      "projectName": "Realtime IoT Sensor Monitoring System",
+      "description": "This system provides a live dashboard for visualizing data from various environmental sensors. It was developed to solve the problem of delayed awareness by streaming readings to a mobile app with less than one-second latency.\n\nUsers can track historical trends through graphs and receive instant notifications if sensor values cross dangerous thresholds. This ensures that operators can make fast, informed decisions based on real-time data from the physical world.",
+      "category": "IoT Systems",
+      "duration": "2-3 Months",
+      "industry": "Environmental Monitoring",
+      "slug": "realtime-iot-sensor-monitoring-system"
+    },
+    {
+      "id": "7",
+      "imageUrl": "8.png",
+      "projectName": "Home Automation via Home Assistant",
+      "description": "This project involved setting up a centralized smart home hub to control appliances and monitor sensors from a single interface. It solved the frustration of using multiple different apps to manage various smart devices in a household.\n\nI integrated several relays and sensors into Home Assistant, allowing for automated control of lights, fans, and climate. This provided a unified, reliable system for home management with real-time feedback and remote accessibility.",
+      "category": "IoT Systems",
+      "duration": "2 Months",
+      "industry": "Home Automation",
+      "slug": "home-automation-via-home-assistant"
+    },
+    {
+      "id": "8",
+      "imageUrl": "9.png",
+      "projectName": "IoT Smart Parking App",
+      "description": "This is a rapid-prototype mobile application that displays real-time parking slot availability using live camera feeds. It solved the uncertainty drivers face when looking for parking by providing immediate visual confirmation of open spots.\n\nThe app uses an ESP8266 camera to stream images to a real-time database, which are then displayed with a status overlay. This simple yet effective tool prevents double-booking and reduces the time wasted searching through full parking lots.",
+      "category": "IoT Systems",
+      "duration": "4 Hours",
+      "industry": "Transportation",
+      "slug": "iot-smart-parking-app"
+    },
+    {
+      "id": "9",
+      "imageUrl": "10.png",
+      "projectName": "2MileRunClub",
+      "description": "This iOS application serves as a comprehensive platform for marathon organization and participation. It solved the problem of disorganized event management by allowing runners to enroll, view live routes, and track other participants in real time.\n\nThe system includes an admin panel for managing schedules and participant communications. It significantly improved the coordination of race events by providing runners with clear navigation and live updates during the run.",
+      "category": "Mobile Apps",
+      "duration": "2 Months",
+      "industry": "Health & Fitness",
+      "slug": "2milerunclub"
+    },
+    {
+      "id": "10",
+      "imageUrl": "11.png",
+      "projectName": "Pollutant Dashboard",
+      "description": "This enterprise-level dashboard was created to monitor air quality and environmental hazards in industrial zones. It solved the critical safety issue of slow hazard detection by providing real-time alerts and evacuation triggers for field employees.\n\nThe system visualizes data from a multi-level hierarchy of sensors on a single screen. This allows safety officers to monitor trends instantly and respond to dangerous AQI levels immediately, ensuring worker protection in hazardous environments.",
+      "category": "IoT Systems",
+      "duration": "6 Months",
+      "industry": "Industrial Safety",
+      "slug": "pollutant-dashboard"
+    },
+    {
+      "id": "11",
+      "imageUrl": "12.png",
+      "projectName": "Darzi Near BY",
+      "description": "This local service marketplace app helps users find and contact nearby tailors (darzis) in Pakistan. It solved the problem of these services being entirely offline, which made it time-consuming for customers to discover reliable stitching options.\n\nThe app features location-based search and direct WhatsApp contact actions for easy communication. By providing a digital presence for local businesses, it simplified the discovery process for users and helped tailors reach a wider customer base.",
+      "category": "Mobile Apps",
+      "duration": "2 Months",
+      "industry": "Local Services",
+      "slug": "darzi-near-by"
+    },
+    {
+      "id": "12",
+      "imageUrl": "15.png",
+      "projectName": "App UI Redesign for Scale",
+      "description": "This project involved a complete visual and structural overhaul of a legacy mobile application for the AnimestanPk brand. It solved the problem of poor user trust caused by an outdated design that no longer matched the company's growth.\n\nI modernized the UI and improved navigation while maintaining all existing data bindings and backend integrations. This resulted in a professional brand image and a conversion-ready user experience that was successfully approved for both major app stores.",
+      "category": "Web & UI/UX",
+      "duration": "2 Months",
+      "industry": "E-commerce",
+      "slug": "app-ui-redesign-for-scale"
+    },
+    {
+      "id": "13",
+      "imageUrl": "16.png",
+      "projectName": "Diabetic Foot Risk Detection AI",
+      "description": "This AI-powered system was developed to assist in the early detection of diabetic foot risks using computer vision. It addresses the challenge of delayed medical diagnosis by providing a tool that can analyze foot health and identify potential issues early.\n\nBy integrating a machine learning model with a mobile interface, the project enables proactive monitoring and risk assessment. It aims to improve patient outcomes by making advanced health diagnostic tools more accessible and easier to use.",
+      "category": "AI & Computer Vision",
+      "duration": "3-4 Months",
+      "industry": "Healthcare",
+      "slug": "diabetic-foot-risk-detection-ai"
+    },
+    {
+      "id": "14",
+      "imageUrl": "17.png",
+      "projectName": "Investigation Session AI System",
+      "description": "This desktop application uses computer vision to analyze facial gestures during interrogation sessions. It solves the problem of subjective human observation by providing an objective, digital record of behavioral signals linked to specific answers.\n\nThe tool captures real-time gestures and generates a detailed report highlighting truthfulness indicators and suspicious responses. This gives investigators a data-backed 'digital observer' to help them make more confident and unbiased conclusions.",
+      "category": "AI & Computer Vision",
+      "duration": "3 Months",
+      "industry": "Law Enforcement Tech",
+      "slug": "investigation-session-ai-system"
+    },
+    {
+      "id": "15",
+      "imageUrl": "18.png",
+      "projectName": "AnimestanPk - Online Store",
+      "description": "This project involved launching a professional online store to move a local retail business from zero digital presence to an active sales channel. It solved the problem of unmanaged inventory by providing a structured platform for orders and sales tracking.\n\nI built a lightweight, mobile-responsive store that was simple for a non-technical client to manage independently. The store successfully enabled online sales and helped the business move millions in inventory within its first few months.",
+      "category": "Web & UI/UX",
+      "duration": "2 Months",
+      "industry": "Retail",
+      "slug": "animestanpk-online-store"
+    },
+    {
+      "id": "16",
+      "imageUrl": "19.png",
+      "projectName": "Construction Company Website Redesign",
+      "description": "This project transformed an outdated, static website into a modern digital presence for a high-value construction firm. It solved a critical trust gap where potential customers were deterred by the firm's old and unprofessional branding.\n\nThe new design features a service-focused structure and a clear inquiry flow to convert visitors into leads. By effectively showcasing the company's work quality, the website became a powerful tool for attracting high-ticket projects and building industry credibility.",
+      "category": "Web & UI/UX",
+      "duration": "2 Months",
+      "industry": "Construction",
+      "slug": "construction-company-website-redesign"
+    },
+    {
+      "id": "17",
+      "imageUrl": "20.png",
+      "projectName": "Photographer-Centric App (NDA)",
+      "description": "This project focused on adding advanced professional features to a live photography platform with over 80,000 users. It solved the problem of low professional engagement by providing photographers with specialized tools to showcase and manage their work.\n\nI integrated new workflows and data handling updates using a modular approach to ensure zero disruption for the active user base. This allowed the app to scale its features safely while maintaining high stability and performance for a large-scale audience.",
+      "category": "Mobile Apps",
+      "duration": "2-3 Months",
+      "industry": "Social Media",
+      "slug": "photographer-centric-app-nda"
+    },
+    {
+      "id": "18",
+      "imageUrl": "21.png",
+      "projectName": "Digital Legacy Management App (NDA)",
+      "description": "This application provides a secure way for families to manage legal documents and digital assets after a loved one’s passing. It solved the chaos and legal confusion that often occurs during grief by centralizing all critical records in one secure place.\n\nThe platform features controlled access for nominees and secure document storage flows. It was designed to remove the burden of searching for lost information, ensuring a smooth and legally sound transition during difficult times.",
+      "category": "Data & Analytics",
+      "duration": "3 Months",
+      "industry": "End-of-Life Planning",
+      "slug": "digital-legacy-management-app-nda"
+    },
+    {
+      "id": "19",
+      "imageUrl": "22.png",
+      "projectName": "Healthcare Analytics & Forecasting System",
+      "description": "This enterprise system was built to unify scattered medical data across multiple clinics for better financial and operational planning. It solved the problem of 'blind' decision-making by providing a reliable way to predict treatment costs and patient trends.\n\nI designed a robust data pipeline that processes massive datasets into a unified analytics layer. This enables medical management teams to use AI-driven insights for strategic resource allocation and improving the overall quality of patient care.",
+      "category": "Data & Analytics",
+      "duration": "3-4 Months",
+      "industry": "HealthTech",
+      "slug": "healthcare-analytics-forecasting-system"
+    },
+    {
+      "id": "20",
+      "imageUrl": "23.png",
+      "projectName": "Local P2P VR Streaming System",
+      "description": "This project achieved a low-latency VR experience using local peer-to-peer streaming. It solved the high cost barrier of VR by allowing users to play PC games in a VR headset without needing expensive, dedicated hardware.\n\nBy optimizing sensor fusion and smoothing algorithms, I reduced motion jitter and achieved a streaming latency of approximately 10ms. This made it possible to have a smooth, immersive VR experience on affordable mobile devices through high-performance data handling.",
+      "category": "Real-time & VR",
+      "duration": "3 Months",
+      "industry": "Gaming / VR",
+      "slug": "local-p2p-vr-streaming-system"
+    }
+  ]
+}

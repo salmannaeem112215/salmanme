@@ -1,0 +1,365 @@
+@@include("partials/main.html")
+<head>
+    @@include("partials/title-meta.html", {
+        "title": "Project Case Study | Salman Naeem",
+        "description": "Detailed case studies of software projects delivered by Salman Naeem, including architecture, outcomes, and implementation highlights.",
+        "keywords": "project case study, software architecture, Flutter case study, AI project details, web app project",
+        "canonical": "/project-details"
+    })
+    <base href="/">
+    
+    <link href="assets/libs/tiny-slider/tiny-slider.css" rel="stylesheet">
+    @@include("partials/head-css.html")
+
+    <style>
+        /* Fix for potential slider icon paths */
+        .tns-controls button { @apply size-9 inline-flex items-center justify-center rounded-full bg-white dark:bg-slate-900 shadow dark:shadow-gray-800 text-dark dark:text-white mx-1.5 border-none; }
+
+        /* Keep portfolio slider images visually consistent. */
+        #project-slider img {
+            width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+            object-position: center;
+            display: block;
+            margin: 0 auto;
+        }
+
+        #project-slider .image-frame {
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(248 250 252 / 1);
+            border-radius: 0.375rem;
+        }
+
+        html.dark #project-slider .image-frame {
+            background-color: rgb(15 23 42 / 1);
+        }
+
+        #image-viewer {
+            background-color: rgba(2, 6, 23, 0.88);
+        }
+
+        #image-viewer img {
+            max-height: 90vh;
+            max-width: 92vw;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+    </style>
+</head>
+
+@@include("partials/body.html")
+    @@include("partials/navbar/nav-center-light.html")
+    
+
+    <section class="relative table w-full py-32 lg:py-40 bg-[url('../../assets/images/portfolio/bg-inner.jpg')] bg-no-repeat bg-center bg-cover">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black"></div>
+        <div class="container relative">
+            <div class="grid grid-cols-1 pb-8 text-center mt-10">
+                <h3 id="hero-title" class="mb-3 text-3xl leading-normal font-medium text-white">Loading...</h3>
+
+                <ul class="list-none">
+                    <li class="inline font-semibold text-white/60 me-2"> <span class="text-white">Industry :</span> <span id="hero-industry">---</span></li>
+                    <li class="inline font-semibold text-white/60"> <span class="text-white">Duration :</span> <span id="hero-duration">---</span></li>
+                </ul>
+
+                <div class="mt-5 flex items-center justify-center gap-3">
+                    <a id="prev-project-btn" href="#" class="py-2 px-4 inline-block font-semibold tracking-wide border align-middle duration-300 text-sm text-center bg-white/10 hover:bg-white/20 border-white/30 text-white rounded-md">Prev Project</a>
+                    <a id="next-project-btn" href="#" class="py-2 px-4 inline-block font-semibold tracking-wide border align-middle duration-300 text-sm text-center bg-white/10 hover:bg-white/20 border-white/30 text-white rounded-md">Next Project</a>
+                </div>
+            </div>
+        </div>
+    </section>
+     <div class="relative">
+            <div class="shape absolute sm:-bottom-px -bottom-[2px] start-0 end-0 overflow-hidden z-1 text-white dark:text-slate-900">
+                <svg class="w-full h-auto scale-[2.0] origin-top" viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
+                </svg>
+            </div>
+        </div>
+
+    <section class="relative md:py-24 py-16">
+        <div id="slider-container" class="container relative hidden">
+            <div class="grid grid-cols-1">
+                <div id="project-slider" class="tiny-single-item">
+                    </div>
+            </div>
+        </div>
+
+        <div class="container relative md:mt-24 mt-16">
+            <div class="grid md:grid-cols-12 grid-cols-1 gap-[30px]">
+                <div class="lg:col-span-4 md:col-span-5">
+                    <div class="bg-gray-50 dark:bg-slate-800 shadow dark:shadow-gray-800 p-6 rounded-md">
+                        <h5 class="text-lg font-semibold border-b border-gray-100 dark:border-gray-700 pb-3 mb-3">Project Info :</h5>
+                        <dl class="grid grid-cols-12 mb-0">
+                            <dt class="md:col-span-4 col-span-5 mt-2">Industry :</dt>
+                            <dd id="info-industry" class="md:col-span-8 col-span-7 mt-2 text-slate-400">---</dd>
+
+                            <dt class="md:col-span-4 col-span-5 mt-2">Category :</dt>
+                            <dd id="info-category" class="md:col-span-8 col-span-7 mt-2 text-slate-400">---</dd>
+
+                            <dt class="md:col-span-4 col-span-5 mt-2">Duration :</dt>
+                            <dd id="info-duration" class="md:col-span-8 col-span-7 mt-2 text-slate-400">---</dd>
+                        </dl>   
+                    </div>
+                </div>
+
+                <div class="lg:col-span-8 md:col-span-7">
+                    <div class="lg:me-5">
+                        <h4 id="content-name" class="text-xl font-semibold mb-3 border-b border-gray-100 dark:border-gray-700 pb-3">Project Name :</h4>
+                        <div id="content-description" class="text-slate-400">
+                            </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+         <div class="container relative md:mt-24 mt-16">
+                <div class="grid grid-cols-1 text-center">
+                    <span class="text-slate-400 mb-4">Available for freelance project</span>
+                    <h3 class="md:text-3xl text-2xl md:leading-normal leading-normal font-semibold">Do you have designing project? <br> Let's talk.</h3>
+
+                    <div class="mt-6">
+                        <a href="contact" class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-full"><i class="uil uil-phone"></i> Contact us</a>
+                    </div>
+                </div><!--end grid-->
+            </div><!--end container-->
+    </section>
+
+    @@include("partials/footer/footer.html")
+    <!-- Back to top -->
+    <a href="#" onclick="topFunction()" id="back-to-top" class="back-to-top fixed hidden text-lg rounded-full z-10 bottom-5 end-5 size-9 text-center bg-indigo-600 text-white leading-9"><i class="uil uil-arrow-up"></i></a>
+    <!-- Back to top -->
+
+    @@include("partials/switcher.html")
+
+    <div id="image-viewer" class="fixed inset-0 z-[999] hidden items-center justify-center p-4" aria-hidden="true">
+        <button id="image-viewer-close" type="button" class="absolute top-4 right-4 size-10 rounded-full bg-white/10 text-white border border-white/20 hover:bg-white/20" aria-label="Close image viewer">X</button>
+        <div id="image-viewer-content" class="relative max-w-full max-h-full">
+            <img id="image-viewer-img" src="" alt="Full project image" class="rounded-md shadow-2xl">
+        </div>
+    </div>
+
+    <script src="assets/libs/tiny-slider/min/tiny-slider.js"></script>
+    <script src="assets/libs/feather-icons/feather.min.js"></script>
+    
+  <script>
+async function loadProject() {
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Prefer /project-details/{slug} and keep ?slug= as query fallback.
+        const pathSegments = window.location.pathname.split('/').filter(Boolean);
+        const slugFromPath = pathSegments.length > 1 ? decodeURIComponent(pathSegments[pathSegments.length - 1]) : null;
+        const slugParam = slugFromPath || urlParams.get('slug');
+
+        // 2. Fetch data from root assets folder
+        // Note: Use 'assets/data.json' if this file is in the root, 
+        // or '../assets/data.json' if this file is inside a 'project/' folder.
+        const response = await fetch('assets/data.json'); 
+        if (!response.ok) throw new Error("Data not found");
+        
+        const data = await response.json();
+        const projects = Array.isArray(data.projects) ? data.projects : [];
+
+        function toSlug(value) {
+            return String(value || '')
+                .toLowerCase()
+                .normalize('NFKD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '')
+                .replace(/-{2,}/g, '-');
+        }
+
+        const currentIndex = projects.findIndex(p => {
+            const projectSlug = p.slug || toSlug(p.projectName);
+            return projectSlug === slugParam;
+        });
+        const normalizedIndex = currentIndex >= 0 ? currentIndex : 0;
+        const project = projects[normalizedIndex];
+
+        if (!project) {
+            document.getElementById('hero-title').innerText = "Project Not Found";
+            return;
+        }
+
+        // 3. Populate Texts
+        document.getElementById('hero-title').innerText = project.projectName;
+        document.getElementById('hero-industry').innerText = project.industry;
+        document.getElementById('hero-duration').innerText = project.duration;
+        document.getElementById('info-industry').innerText = project.industry;
+        document.getElementById('info-category').innerText = project.category;
+        document.getElementById('info-duration').innerText = project.duration;
+        document.getElementById('content-name').innerText = project.projectName;
+
+        const prevButton = document.getElementById('prev-project-btn');
+        const nextButton = document.getElementById('next-project-btn');
+        if (prevButton && nextButton && projects.length > 0) {
+            const prevIndex = (normalizedIndex - 1 + projects.length) % projects.length;
+            const nextIndex = (normalizedIndex + 1) % projects.length;
+            const prevSlug = encodeURIComponent(projects[prevIndex].slug || toSlug(projects[prevIndex].projectName));
+            const nextSlug = encodeURIComponent(projects[nextIndex].slug || toSlug(projects[nextIndex].projectName));
+
+            prevButton.href = `project-details/${prevSlug}`;
+            nextButton.href = `project-details/${nextSlug}`;
+        }
+        
+        // Format description with paragraphs
+        document.getElementById('content-description').innerHTML = project.description
+            .split('\n\n')
+            .map(p => `<p class="mb-3">${p}</p>`)
+            .join('');
+
+        // 4. Populate Slider
+        const sliderContainer = document.getElementById('slider-container');
+        const sliderDiv = document.getElementById('project-slider');
+        const images = Array.isArray(project.images) ? [...project.images] : [];
+
+        function resolveImageSrc(value) {
+            const raw = (value || '').toString().trim();
+            if (!raw) return '';
+
+            if (raw.startsWith('http://') || raw.startsWith('https://') || raw.startsWith('/')) {
+                return raw;
+            }
+
+            // Support both plain file names (e.g. 1.png) and already-prefixed asset paths.
+            if (raw.startsWith('assets/')) {
+                return raw;
+            }
+
+            return `assets/projects/cover/${raw}`;
+        }
+
+        if (project.image) {
+            images.push(project.image);
+        }
+
+        if (project.imageUrl) {
+            images.push(project.imageUrl);
+        }
+
+        const uniqueImages = [...new Set(images.map(resolveImageSrc).filter(Boolean))];
+
+        if (uniqueImages.length > 0) {
+            sliderContainer.classList.remove('hidden');
+            sliderDiv.innerHTML = uniqueImages.map(imgSrc => {
+                return `
+                    <div class="tiny-slide">
+                        <div class="m-2 image-frame shadow dark:shadow-gray-800">
+                            <button type="button" class="js-open-image w-full h-full flex items-center justify-center" data-image-src="${imgSrc}" aria-label="Open full image">
+                                <img src="${imgSrc}" class="rounded-md" alt="Project image">
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Initialize Slider
+            if (window.tns) {
+                tns({
+                    container: '.tiny-single-item',
+                    items: 1,
+                    controls: true,
+                    mouseDrag: true,
+                    loop: true,
+                    autoplay: true,
+                    autoplayButtonOutput: false,
+                    nav: false,
+                    speed: 400,
+                    controlsText: ['<i class="mdi mdi-chevron-left"></i>', '<i class="mdi mdi-chevron-right"></i>'],
+                });
+            }
+        }
+
+        const projectSlug = project.slug || toSlug(project.projectName);
+        const canonicalPath = `/project-details/${projectSlug}`;
+        const dynamicTitle = `${project.projectName} | Case Study | Salman Naeem`;
+        const dynamicDescription = `${project.projectName}: ${project.industry} project in ${project.category}. Duration: ${project.duration}.`;
+
+        document.title = dynamicTitle;
+
+        const descriptionMeta = document.querySelector('meta[name="description"]');
+        const keywordMeta = document.querySelector('meta[name="keywords"]');
+        const canonicalLink = document.querySelector('link[rel="canonical"]');
+        const ogTitle = document.querySelector('meta[property="og:title"]');
+        const ogDescription = document.querySelector('meta[property="og:description"]');
+        const ogUrl = document.querySelector('meta[property="og:url"]');
+        const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+        const twitterDescription = document.querySelector('meta[name="twitter:description"]');
+
+        if (descriptionMeta) descriptionMeta.setAttribute('content', dynamicDescription);
+        if (keywordMeta) keywordMeta.setAttribute('content', `${project.projectName}, ${project.category}, ${project.industry}, software case study, Salman Naeem`);
+        if (canonicalLink) canonicalLink.setAttribute('href', canonicalPath);
+        if (ogTitle) ogTitle.setAttribute('content', dynamicTitle);
+        if (ogDescription) ogDescription.setAttribute('content', dynamicDescription);
+        if (ogUrl) ogUrl.setAttribute('content', canonicalPath);
+        if (twitterTitle) twitterTitle.setAttribute('content', dynamicTitle);
+        if (twitterDescription) twitterDescription.setAttribute('content', dynamicDescription);
+
+    } catch (error) {
+    }
+}
+
+function setupImageViewer() {
+    const viewer = document.getElementById('image-viewer');
+    const viewerImage = document.getElementById('image-viewer-img');
+    const viewerClose = document.getElementById('image-viewer-close');
+    const viewerContent = document.getElementById('image-viewer-content');
+    const slider = document.getElementById('project-slider');
+
+    if (!viewer || !viewerImage || !viewerClose || !viewerContent || !slider) {
+        return;
+    }
+
+    function closeViewer() {
+        viewer.classList.add('hidden');
+        viewer.classList.remove('flex');
+        viewer.setAttribute('aria-hidden', 'true');
+        viewerImage.src = '';
+    }
+
+    function openViewer(src) {
+        viewerImage.src = src;
+        viewer.classList.remove('hidden');
+        viewer.classList.add('flex');
+        viewer.setAttribute('aria-hidden', 'false');
+    }
+
+    slider.addEventListener('click', function (event) {
+        const trigger = event.target.closest('.js-open-image');
+        if (!trigger) return;
+        const src = trigger.getAttribute('data-image-src');
+        if (src) {
+            openViewer(src);
+        }
+    });
+
+    viewerClose.addEventListener('click', closeViewer);
+
+    viewer.addEventListener('click', function (event) {
+        if (!viewerContent.contains(event.target)) {
+            closeViewer();
+        }
+    });
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && !viewer.classList.contains('hidden')) {
+            closeViewer();
+        }
+    });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+    setupImageViewer();
+    loadProject();
+});
+</script>
+    @@include("partials/script-file.html")
+</body>
+</html>

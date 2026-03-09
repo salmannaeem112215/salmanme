@@ -1,0 +1,183 @@
+@@include("partials/main.html")
+
+<head>
+    @@include("partials/title-meta.html", {
+      "title": "Projects | Salman Naeem",
+      "description": "Explore software projects by Salman Naeem across IoT, AI, mobile apps, web platforms, and data-driven systems.",
+      "keywords": "software projects, case studies, IoT projects, AI projects, Flutter apps, web development portfolio",
+      "canonical": "/project"
+    })
+
+    <!-- Css -->
+    <link href="assets/libs/tobii/css/tobii.min.css" rel="stylesheet">
+    @@include("partials/head-css.html")
+</head>
+
+@@include("partials/body.html")
+
+@@include("partials/navbar/nav-center-light.html")
+
+<!-- Start Hero -->
+<section
+    class="relative table w-full py-32 lg:py-40 bg-[url('../../assets/images/portfolio/bg-inner.jpg')] bg-no-repeat bg-center bg-cover">
+    <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black"></div>
+    <div class="container relative">
+        <div class="grid grid-cols-1 pb-8 text-center mt-10">
+            <h3 class="mb-3 text-3xl leading-normal font-medium text-white">Projects & Works</h3>
+
+        </div><!--end grid-->
+    </div><!--end container-->
+
+  
+</section><!--end section-->
+<div class="relative">
+    <div
+        class="shape absolute sm:-bottom-px -bottom-[2px] start-0 end-0 overflow-hidden z-1 text-white dark:text-slate-900">
+        <svg class="w-full h-auto scale-[2.0] origin-top" viewBox="0 0 2880 48" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
+        </svg>
+    </div>
+</div>
+<!-- End Hero -->
+
+<!-- Start Section-->
+<section class="relative md:py-24 py-16">
+    <div class="container relative">
+        <div class="grid grid-cols-1 items-center gap-[30px]">
+            <div class="filters-group-wrap text-center">
+                <div id="category-filters" class="filters-group">
+                    <ul class="mb-0 list-none container-filter-border-bottom filter-options space-x-3">
+                    </ul>
+                </div>
+            </div>
+        </div><!--grid-->
+        <div id="grid" class="flex flex-wrap justify-center mx-auto mt-4"></div>
+    </div><!--end container-->
+
+    <div class="container relative md:mt-24 mt-16">
+        <div class="grid grid-cols-1 text-center">
+            <span class="text-slate-400 mb-4">Available for freelance project</span>
+            <h3 class="md:text-3xl text-2xl md:leading-normal leading-normal font-semibold">Do you have designing
+                project? <br> Let's talk.</h3>
+
+            <div class="mt-6">
+                <a href="contact"
+                    class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-full"><i
+                        class="uil uil-phone"></i> Contact us</a>
+            </div>
+        </div><!--end grid-->
+    </div><!--end container-->
+</section><!--end section-->
+<!-- End Section-->
+
+@@include("partials/footer/footer.html")
+
+<!-- Back to top -->
+<a href="#" onclick="topFunction()" id="back-to-top"
+    class="back-to-top fixed hidden text-lg rounded-full z-10 bottom-5 end-5 size-9 text-center bg-indigo-600 text-white leading-9"><i
+        class="uil uil-arrow-up"></i></a>
+<!-- Back to top -->
+
+@@include("partials/switcher.html")
+
+<!-- JAVASCRIPTS -->
+
+<script src="assets/libs/shufflejs/shuffle.min.js"></script>
+<script src="assets/libs/tobii/js/tobii.min.js"></script>
+<script src="assets/libs/feather-icons/feather.min.js"></script>
+<script>
+fetch('assets/data.json')
+  .then(res => res.json())
+  .then(data => {
+    const filterContainer = document.querySelector("#category-filters ul");
+    const grid = document.getElementById("grid");
+
+    // ---------------- FILTERS ----------------
+    filterContainer.innerHTML = `<li class="inline-block text-lg font-semibold mb-3 cursor-pointer active" data-group="all">All</li>`;
+
+    data.categories.forEach(cat => {
+      filterContainer.innerHTML += `
+        <li class="inline-block text-lg font-semibold mb-3 cursor-pointer" data-group="${cat.toLowerCase()}">${cat}</li>
+      `;
+    });
+
+    // ---------------- PROJECTS ----------------
+    const imagePool = [1, 2, 3, 4, 5, 6, 7, 8, 20, 21, 22, 23];
+
+    function toSlug(value) {
+      return String(value || '')
+        .toLowerCase()
+        .normalize('NFKD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .replace(/-{2,}/g, '-');
+    }
+
+    data.projects.forEach(project => {
+      const categorySlug = project.category.toLowerCase();
+      const imageName = project.imageUrl?.trim();
+      const randomImage = imagePool[Math.floor(Math.random() * imagePool.length)];
+      const projectSlug = encodeURIComponent((project.slug || toSlug(project.projectName)).trim());
+      const imageUrl = imageName
+        ? `assets/projects/cover/${imageName}`
+        : `assets/images/portfolio/${randomImage}.jpg`;
+
+      grid.innerHTML += `
+        <div class="lg:w-1/3 md:w-1/2 p-4 picture-item" data-groups='["${categorySlug}"]'>
+          <div class="group relative block overflow-hidden rounded-md duration-500">
+
+            <img src="${imageUrl}"
+                 class="group-hover:origin-center group-hover:scale-110 group-hover:rotate-3 duration-500" alt="">
+
+            <div class="absolute inset-2 group-hover:bg-white/90 dark:group-hover:bg-slate-900/90 duration-500 z-0 rounded-md"></div>
+
+            <div class="content duration-500">
+              <!-- Lightbox Icon -->
+              <div class="icon absolute z-10 opacity-0 group-hover:opacity-100 top-6 end-6 duration-500">
+                <a href="${imageUrl}"
+                   class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-full lightbox">
+                  <i class="uil uil-camera"></i>
+                </a>
+              </div>
+
+              <!-- Project Text -->
+              <div class="absolute z-10 opacity-0 group-hover:opacity-100 bottom-6 start-6 duration-500">
+                 <a href="project-details/${projectSlug}"
+                   class="h6 text-lg font-medium hover:text-indigo-600 duration-500 ease-in-out">
+                   ${project.projectName}
+                </a>
+                <p class="text-slate-400 mb-0">${project.industry}</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      `;
+    });
+
+    // ---------------- SHUFFLE INIT ----------------
+    const shuffleInstance = new Shuffle(grid, {
+      itemSelector: '.picture-item'
+    });
+
+    // Filter Click Events
+    document.querySelectorAll('[data-group]').forEach(btn => {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('[data-group]').forEach(el => el.classList.remove('active'));
+        this.classList.add('active');
+
+        const group = this.getAttribute('data-group');
+        shuffleInstance.filter(group === 'all' ? Shuffle.ALL_ITEMS : group);
+      });
+    });
+
+  })
+  .catch(err => {});
+</script>
+@@include("partials/script-file.html")
+<!-- JAVASCRIPTS -->
+</body>
+
+</html>
