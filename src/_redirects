@@ -1,0 +1,3 @@
+/contact                 /contact.html 200
+/project                 /project.html 200
+/project-details/:slug   /project-details.html?slug=:slug 200
