@@ -4,7 +4,7 @@
     @@include("partials/title-meta.html", {
       "title": "Projects | Salman Naeem",
       "description": "Explore software projects by Salman Naeem across IoT, AI, mobile apps, web platforms, and data-driven systems.",
-      "keywords": "software projects, case studies, IoT projects, AI projects, Flutter apps, web development portfolio",
+      "keywords": "Salman Naeem, Muhammad Salman Naeem, Salman, Flutter Developer, salmanme.com, software projects, case studies, IoT projects, AI projects, Flutter apps, web development portfolio",
       "canonical": "/project"
     })
 
@@ -81,6 +81,8 @@
 
 @@include("partials/switcher.html")
 
+<script id="projects-schema" type="application/ld+json"></script>
+
 <!-- JAVASCRIPTS -->
 
 <script src="assets/libs/shufflejs/shuffle.min.js"></script>
@@ -156,6 +158,27 @@ fetch('assets/data.json')
         </div>
       `;
     });
+
+    const itemListSchema = {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Salman Naeem Projects",
+      "url": "https://salmanme.com/project",
+      "itemListElement": data.projects.map((project, index) => {
+        const projectSlug = encodeURIComponent((project.slug || toSlug(project.projectName)).trim());
+        return {
+          "@type": "ListItem",
+          "position": index + 1,
+          "name": project.projectName,
+          "url": `https://salmanme.com/project-details/${projectSlug}`
+        };
+      })
+    };
+
+    const schemaNode = document.getElementById('projects-schema');
+    if (schemaNode) {
+      schemaNode.textContent = JSON.stringify(itemListSchema);
+    }
 
     // ---------------- SHUFFLE INIT ----------------
     const shuffleInstance = new Shuffle(grid, {

@@ -3,7 +3,7 @@
     @@include("partials/title-meta.html", {
         "title": "Project Case Study | Salman Naeem",
         "description": "Detailed case studies of software projects delivered by Salman Naeem, including architecture, outcomes, and implementation highlights.",
-        "keywords": "project case study, software architecture, Flutter case study, AI project details, web app project",
+        "keywords": "Salman Naeem, Muhammad Salman Naeem, Salman, Flutter Developer, salmanme.com, project case study, software architecture, Flutter case study, AI project details, web app project",
         "canonical": "/project-details"
     })
     <base href="/">
@@ -136,6 +136,8 @@
     <!-- Back to top -->
 
     @@include("partials/switcher.html")
+
+    <script id="project-schema" type="application/ld+json"></script>
 
     <div id="image-viewer" class="fixed inset-0 z-[999] hidden items-center justify-center p-4" aria-hidden="true">
         <button id="image-viewer-close" type="button" class="absolute top-4 right-4 size-10 rounded-full bg-white/10 text-white border border-white/20 hover:bg-white/20" aria-label="Close image viewer">X</button>
@@ -295,12 +297,34 @@ async function loadProject() {
 
         if (descriptionMeta) descriptionMeta.setAttribute('content', dynamicDescription);
         if (keywordMeta) keywordMeta.setAttribute('content', `${project.projectName}, ${project.category}, ${project.industry}, software case study, Salman Naeem`);
-        if (canonicalLink) canonicalLink.setAttribute('href', canonicalPath);
+        if (canonicalLink) canonicalLink.setAttribute('href', `https://salmanme.com${canonicalPath}`);
         if (ogTitle) ogTitle.setAttribute('content', dynamicTitle);
         if (ogDescription) ogDescription.setAttribute('content', dynamicDescription);
-        if (ogUrl) ogUrl.setAttribute('content', canonicalPath);
+        if (ogUrl) ogUrl.setAttribute('content', `https://salmanme.com${canonicalPath}`);
         if (twitterTitle) twitterTitle.setAttribute('content', dynamicTitle);
         if (twitterDescription) twitterDescription.setAttribute('content', dynamicDescription);
+
+        const schemaNode = document.getElementById('project-schema');
+        if (schemaNode) {
+            const primaryImage = uniqueImages.length > 0 ? uniqueImages[0] : 'assets/images/personal/hero.png';
+            const schema = {
+                "@context": "https://schema.org",
+                "@type": "CreativeWork",
+                "name": project.projectName,
+                "headline": project.projectName,
+                "description": project.description,
+                "author": {
+                    "@type": "Person",
+                    "name": "Muhammad Salman Naeem",
+                    "alternateName": ["Salman Naeem", "Salman"]
+                },
+                "url": `https://salmanme.com${canonicalPath}`,
+                "image": primaryImage.startsWith('http') ? primaryImage : `https://salmanme.com/${primaryImage.replace(/^\/+/, '')}`,
+                "about": [project.category, project.industry, "Flutter Developer", "Software Engineering"]
+            };
+
+            schemaNode.textContent = JSON.stringify(schema);
+        }
 
     } catch (error) {
     }
