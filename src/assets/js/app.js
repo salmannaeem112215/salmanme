@@ -276,7 +276,7 @@ try {
                 }
             }
         };
-        xhttp.open("POST", "assets/php/contact.php", true);
+        xhttp.open("POST", "/.netlify/functions/contact", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(
             "name=" + encodeURIComponent(name) +

@@ -227,7 +227,7 @@ gulp.task('browsersync', function (callback) {
                     const originalUrl = req.url || '/';
                     const [pathname, queryString] = originalUrl.split('?');
 
-                    if (req.method === 'POST' && (pathname === '/assets/php/contact.php' || pathname === '/php/contact.php')) {
+                    if (req.method === 'POST' && (pathname === '/assets/php/contact.php' || pathname === '/php/contact.php' || pathname === '/.netlify/functions/contact')) {
                         handleContactPost(req, res);
                         return;
                     }
