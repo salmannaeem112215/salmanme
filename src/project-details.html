@@ -60,7 +60,7 @@
         <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black"></div>
         <div class="container relative">
             <div class="grid grid-cols-1 pb-8 text-center mt-10">
-                <h3 id="hero-title" class="mb-3 text-3xl leading-normal font-medium text-white">Loading...</h3>
+                <h1 id="hero-title" class="mb-3 text-3xl leading-normal font-medium text-white">Loading...</h1>
 
                 <ul class="list-none">
                     <li class="inline font-semibold text-white/60 me-2"> <span class="text-white">Industry :</span> <span id="hero-industry">---</span></li>
@@ -153,11 +153,12 @@
 async function loadProject() {
     try {
         const urlParams = new URLSearchParams(window.location.search);
+        const staticSlug = typeof window.__PROJECT_SLUG__ === 'string' ? window.__PROJECT_SLUG__.trim() : '';
 
         // Prefer /project-details/{slug} and keep ?slug= as query fallback.
         const pathSegments = window.location.pathname.split('/').filter(Boolean);
         const slugFromPath = pathSegments.length > 1 ? decodeURIComponent(pathSegments[pathSegments.length - 1]) : null;
-        const slugParam = slugFromPath || urlParams.get('slug');
+        const slugParam = staticSlug || slugFromPath || urlParams.get('slug');
 
         // 2. Fetch data from root assets folder
         // Note: Use 'assets/data.json' if this file is in the root, 
@@ -207,8 +208,8 @@ async function loadProject() {
             const prevSlug = encodeURIComponent(projects[prevIndex].slug || toSlug(projects[prevIndex].projectName));
             const nextSlug = encodeURIComponent(projects[nextIndex].slug || toSlug(projects[nextIndex].projectName));
 
-            prevButton.href = `project-details/${prevSlug}`;
-            nextButton.href = `project-details/${nextSlug}`;
+            prevButton.href = `/project-details/${prevSlug}`;
+            nextButton.href = `/project-details/${nextSlug}`;
         }
         
         // Format description with paragraphs

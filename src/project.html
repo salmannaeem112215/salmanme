@@ -23,7 +23,7 @@
     <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black"></div>
     <div class="container relative">
         <div class="grid grid-cols-1 pb-8 text-center mt-10">
-            <h3 class="mb-3 text-3xl leading-normal font-medium text-white">Projects & Works</h3>
+        <h1 class="mb-3 text-3xl leading-normal font-medium text-white">Projects & Works</h1>
 
         </div><!--end grid-->
     </div><!--end container-->
@@ -53,6 +53,31 @@
             </div>
         </div><!--grid-->
         <div id="grid" class="flex flex-wrap justify-center mx-auto mt-4"></div>
+            <div id="project-fallback-list" class="mt-8">
+              <h2 class="text-2xl font-semibold mb-4 text-center">Project Directory</h2>
+              <ul class="grid md:grid-cols-2 gap-4 list-disc list-inside text-slate-500">
+                <li><a href="/project-details/bus-route-tracking-system" class="hover:text-indigo-600">Bus Route Tracking System</a> - Transportation / Smart Campus</li>
+                <li><a href="/project-details/pos-system-for-book-shop" class="hover:text-indigo-600">POS System for Book Shop</a> - Retail</li>
+                <li><a href="/project-details/iot-bt-image-viewer" class="hover:text-indigo-600">IoT-BT Image Viewer</a> - Tech R&D</li>
+                <li><a href="/project-details/quiz-app" class="hover:text-indigo-600">Quiz App</a> - Education</li>
+                <li><a href="/project-details/espconnect-remote-command-console" class="hover:text-indigo-600">ESPConnect (Remote Command Console)</a> - Embedded Systems</li>
+                <li><a href="/project-details/realtime-iot-sensor-monitoring-system" class="hover:text-indigo-600">Realtime IoT Sensor Monitoring System</a> - Environmental Monitoring</li>
+                <li><a href="/project-details/home-automation-via-home-assistant" class="hover:text-indigo-600">Home Automation via Home Assistant</a> - Home Automation</li>
+                <li><a href="/project-details/iot-smart-parking-app" class="hover:text-indigo-600">IoT Smart Parking App</a> - Transportation</li>
+                <li><a href="/project-details/2milerunclub" class="hover:text-indigo-600">2MileRunClub</a> - Health & Fitness</li>
+                <li><a href="/project-details/pollutant-dashboard" class="hover:text-indigo-600">Pollutant Dashboard</a> - Industrial Safety</li>
+                <li><a href="/project-details/darzi-near-by" class="hover:text-indigo-600">Darzi Near BY</a> - Local Services</li>
+                <li><a href="/project-details/app-ui-redesign-for-scale" class="hover:text-indigo-600">App UI Redesign for Scale</a> - E-commerce</li>
+                <li><a href="/project-details/diabetic-foot-risk-detection-ai" class="hover:text-indigo-600">Diabetic Foot Risk Detection AI</a> - Healthcare</li>
+                <li><a href="/project-details/investigation-session-ai-system" class="hover:text-indigo-600">Investigation Session AI System</a> - Law Enforcement Tech</li>
+                <li><a href="/project-details/animestanpk-online-store" class="hover:text-indigo-600">AnimestanPk - Online Store</a> - Retail</li>
+                <li><a href="/project-details/construction-company-website-redesign" class="hover:text-indigo-600">Construction Company Website Redesign</a> - Construction</li>
+                <li><a href="/project-details/photographer-centric-app-nda" class="hover:text-indigo-600">Photographer-Centric App (NDA)</a> - Social Media</li>
+                <li><a href="/project-details/digital-legacy-management-app-nda" class="hover:text-indigo-600">Digital Legacy Management App (NDA)</a> - End-of-Life Planning</li>
+                <li><a href="/project-details/healthcare-analytics-forecasting-system" class="hover:text-indigo-600">Healthcare Analytics & Forecasting System</a> - HealthTech</li>
+                <li><a href="/project-details/local-p2p-vr-streaming-system" class="hover:text-indigo-600">Local P2P VR Streaming System</a> - Gaming / VR</li>
+              </ul>
+            </div>
     </div><!--end container-->
 
     <div class="container relative md:mt-24 mt-16">
@@ -94,6 +119,11 @@ fetch('assets/data.json')
   .then(data => {
     const filterContainer = document.querySelector("#category-filters ul");
     const grid = document.getElementById("grid");
+    const fallbackList = document.getElementById("project-fallback-list");
+
+    if (fallbackList) {
+      fallbackList.classList.add('hidden');
+    }
 
     // ---------------- FILTERS ----------------
     filterContainer.innerHTML = `<li class="inline-block text-lg font-semibold mb-3 cursor-pointer active" data-group="all">All</li>`;
@@ -146,7 +176,7 @@ fetch('assets/data.json')
 
               <!-- Project Text -->
               <div class="absolute z-10 opacity-0 group-hover:opacity-100 bottom-6 start-6 duration-500">
-                 <a href="project-details/${projectSlug}"
+                  <a href="/project-details/${projectSlug}"
                    class="h6 text-lg font-medium hover:text-indigo-600 duration-500 ease-in-out">
                    ${project.projectName}
                 </a>

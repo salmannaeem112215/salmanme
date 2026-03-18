@@ -34,6 +34,40 @@ function escapeHtml(value) {
         .replace(/'/g, '&#39;');
 }
 
+function toSlug(value) {
+    return String(value || '')
+        .toLowerCase()
+        .normalize('NFKD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .replace(/-{2,}/g, '-');
+}
+
+function resolveProjectImage(project) {
+    const raw = String((project && project.imageUrl) || (project && project.image) || '').trim();
+
+    if (!raw) {
+        return '/assets/images/personal/hero.png';
+    }
+
+    if (/^https?:\/\//i.test(raw) || raw.startsWith('/')) {
+        return raw;
+    }
+
+    if (raw.startsWith('assets/')) {
+        return '/' + raw;
+    }
+
+    return '/assets/projects/cover/' + raw;
+}
+
+function normalizeDescription(description) {
+    return String(description || '')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
 function getContactMailerConfig() {
     return {
         host: process.env.CONTACT_SMTP_HOST || process.env.SMTP_HOST || 'smtp.gmail.com',
@@ -235,8 +269,18 @@ gulp.task('browsersync', function (callback) {
                     const projectDetailMatch = pathname.match(/^\/project-details\/([^/]+)\/?$/);
                     if (projectDetailMatch) {
                         const projectSlug = decodeURIComponent(projectDetailMatch[1]);
-                        const mergedQuery = queryString ? `${queryString}&slug=${encodeURIComponent(projectSlug)}` : `slug=${encodeURIComponent(projectSlug)}`;
-                        req.url = `/project-details.html?${mergedQuery}`;
+                        const staticDetailCandidates = [
+                            path.join(paths.dist.base.dir, 'project-details', projectSlug, 'index.html'),
+                            path.join(paths.src.base.dir, 'project-details', projectSlug, 'index.html'),
+                        ];
+
+                        const hasStaticProjectDetail = staticDetailCandidates.some(file => fs.existsSync(file));
+
+                        if (!hasStaticProjectDetail) {
+                            const mergedQuery = queryString ? `${queryString}&slug=${encodeURIComponent(projectSlug)}` : `slug=${encodeURIComponent(projectSlug)}`;
+                            req.url = `/project-details.html?${mergedQuery}`;
+                        }
+
                         return next();
                     }
 
@@ -414,8 +458,63 @@ gulp.task('html', function () {
         .pipe(gulp.dest(paths.dist.base.dir));
 });
 
+gulp.task('generate:projectDetailsPages', function (callback) {
+    const dataFilePath = path.join(paths.src.base.dir, 'assets', 'data.json');
+    const outputRoot = path.join(paths.dist.base.dir, 'project-details');
+    const detailsTemplatePath = path.join(paths.dist.base.dir, 'project-details.html');
+
+    if (!fs.existsSync(dataFilePath) || !fs.existsSync(detailsTemplatePath)) {
+        callback();
+        return;
+    }
+
+    const detailsTemplateHtml = fs.readFileSync(detailsTemplatePath, 'utf8');
+    const rawData = fs.readFileSync(dataFilePath, 'utf8');
+    const parsed = JSON.parse(rawData);
+    const projects = Array.isArray(parsed.projects) ? parsed.projects : [];
+
+    del.sync([path.join(outputRoot, '*')], { force: true });
+
+    projects.forEach(function (project) {
+        const slug = String(project.slug || toSlug(project.projectName) || '').trim();
+
+        if (!slug) {
+            return;
+        }
+
+        const title = `${project.projectName} | Case Study | Salman Naeem`;
+        const description = normalizeDescription(project.description) || `${project.projectName} case study by Salman Naeem.`;
+        const canonicalUrl = `https://salmanme.com/project-details/${slug}`;
+        const imagePath = resolveProjectImage(project);
+        const absoluteImage = /^https?:\/\//i.test(imagePath)
+            ? imagePath
+            : `https://salmanme.com${imagePath}`;
+        let pageHtml = detailsTemplateHtml;
+
+        pageHtml = pageHtml.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(title)}</title>`);
+        pageHtml = pageHtml.replace(/<meta\s+name="description"\s+content="[^"]*">/i, `<meta name="description" content="${escapeHtml(description)}">`);
+        pageHtml = pageHtml.replace(/<meta\s+name="keywords"\s+content="[^"]*">/i, `<meta name="keywords" content="${escapeHtml(`${project.projectName}, ${project.category}, ${project.industry}, software case study, Salman Naeem`)}">`);
+        pageHtml = pageHtml.replace(/<meta\s+property="og:title"\s+content="[^"]*">/i, `<meta property="og:title" content="${escapeHtml(title)}">`);
+        pageHtml = pageHtml.replace(/<meta\s+property="og:description"\s+content="[^"]*">/i, `<meta property="og:description" content="${escapeHtml(description)}">`);
+        pageHtml = pageHtml.replace(/<meta\s+property="og:url"\s+content="[^"]*">/i, `<meta property="og:url" content="${escapeHtml(canonicalUrl)}">`);
+        pageHtml = pageHtml.replace(/<meta\s+property="og:image"\s+content="[^"]*">/i, `<meta property="og:image" content="${escapeHtml(absoluteImage)}">`);
+        pageHtml = pageHtml.replace(/<meta\s+name="twitter:title"\s+content="[^"]*">/i, `<meta name="twitter:title" content="${escapeHtml(title)}">`);
+        pageHtml = pageHtml.replace(/<meta\s+name="twitter:description"\s+content="[^"]*">/i, `<meta name="twitter:description" content="${escapeHtml(description)}">`);
+        pageHtml = pageHtml.replace(/<meta\s+name="twitter:image"\s+content="[^"]*">/i, `<meta name="twitter:image" content="${escapeHtml(absoluteImage)}">`);
+        pageHtml = pageHtml.replace(/<link\s+rel="canonical"\s+href="[^"]*">/i, `<link rel="canonical" href="${escapeHtml(canonicalUrl)}">`);
+        pageHtml = pageHtml.replace(/<link\s+rel="alternate"\s+hreflang="en"\s+href="[^"]*">/i, `<link rel="alternate" hreflang="en" href="${escapeHtml(canonicalUrl)}">`);
+        pageHtml = pageHtml.replace('</head>', `\n    <script>window.__PROJECT_SLUG__=${JSON.stringify(slug)};</script>\n</head>`);
+
+        const projectDir = path.join(outputRoot, slug);
+        fs.mkdirSync(projectDir, { recursive: true });
+        fs.writeFileSync(path.join(projectDir, 'index.html'), pageHtml, 'utf8');
+    });
+
+    callback();
+});
+
 // Default(Producation) Task
-gulp.task('default', gulp.series(gulp.parallel('clean:packageLock', 'clean:dist', 'copy:all', 'copy:libs', 'fileinclude', 'scss', 'icons', 'js', 'jsPages', 'html'), gulp.parallel('browsersync', 'watch')));
+gulp.task('default', gulp.series(gulp.parallel('clean:packageLock', 'clean:dist', 'copy:all', 'copy:libs', 'fileinclude', 'scss', 'icons', 'js', 'jsPages', 'html'), 'generate:projectDetailsPages', gulp.parallel('browsersync', 'watch')));
 
 // Build(Development) Task
-gulp.task('build', gulp.series('clean:packageLock', 'clean:dist', 'copy:all', 'copy:libs', 'fileinclude', 'scss', 'icons', 'js', 'jsPages', 'html'));
+gulp.task('build', gulp.series('clean:packageLock', 'clean:dist', 'copy:all', 'copy:libs', 'fileinclude', 'scss', 'icons', 'js', 'jsPages', 'html', 'generate:projectDetailsPages'));
